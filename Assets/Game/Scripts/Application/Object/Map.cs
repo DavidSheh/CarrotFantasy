@@ -1,6 +1,22 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
+//鼠标点击参数类
+public class TileClickEventArgs : EventArgs
+{
+    public int MouseButton; //0左键，1右键
+    public Tile Tile;
+
+    public TileClickEventArgs(int mouseButton, Tile tile)
+    {
+        this.MouseButton = mouseButton;
+        this.Tile = tile;
+    }
+}
+
+
 
 //用于描述一个关卡地图的状态
 public class Map : MonoBehaviour
@@ -11,6 +27,7 @@ public class Map : MonoBehaviour
     #endregion
 
     #region 事件
+    public event EventHandler<TileClickEventArgs> OnTileClick;
     #endregion
 
     #region 字段
@@ -148,6 +165,42 @@ public class Map : MonoBehaviour
         for (int i = 0; i < RowCount; i++)
             for (int j = 0; j < ColumnCount; j++)
                 m_grid.Add(new Tile(j, i));
+
+        //监听鼠标点击事件
+        OnTileClick += Map_OnTileClick;
+    }
+
+    void Update()
+    {
+        //鼠标左键检测
+        if (Input.GetMouseButtonDown(0))
+        {
+            Tile t = GetTileUnderMouse();
+            if (t != null)
+            {
+                //触发鼠标左键点击事件
+                TileClickEventArgs e = new TileClickEventArgs(0, t);
+                if (OnTileClick != null)
+                {
+                    OnTileClick(this, e);
+                }
+            }
+        }
+
+        //鼠标右键检测
+        if (Input.GetMouseButtonDown(1))
+        {
+            Tile t = GetTileUnderMouse();
+            if (t != null)
+            {
+                //触发鼠标右键点击事件
+                TileClickEventArgs e = new TileClickEventArgs(1, t);
+                if (OnTileClick != null)
+                {
+                    OnTileClick(this, e);
+                }
+            }
+        }
     }
 
     //只在编辑器里起作用
@@ -215,6 +268,26 @@ public class Map : MonoBehaviour
     #endregion
 
     #region 事件回调
+    void Map_OnTileClick(object sender, TileClickEventArgs e)
+    {
+        if (Level == null)
+            return;
+
+        //处理放塔操作
+        if (e.MouseButton == 0 && !m_road.Contains(e.Tile))
+        {
+            e.Tile.CanHold = !e.Tile.CanHold;
+        }
+
+        //处理寻路点操作
+        if (e.MouseButton == 1 && !e.Tile.CanHold)
+        {
+            if (m_road.Contains(e.Tile))
+                m_road.Remove(e.Tile);
+            else
+                m_road.Add(e.Tile);
+        }
+    }
     #endregion
 
     #region 帮助方法
