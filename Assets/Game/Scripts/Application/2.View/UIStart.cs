@@ -1,8 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
-
-public class UIStart : View
+﻿public class UIStart : View
 {
     public override string Name
     {
@@ -14,7 +10,7 @@ public class UIStart : View
         Game.Instance.LoadScene(2);
     }
 
-    public override void HandleEvent(object obj, object data)
+    public override void HandleEvent(string obj, object data)
     {
         
     }
