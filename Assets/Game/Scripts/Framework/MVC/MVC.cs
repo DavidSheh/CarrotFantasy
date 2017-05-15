@@ -68,7 +68,7 @@ public static class MVC
         // 视图响应事件
         foreach (var view in Views.Values)
         {
-            if(view.AttactionEvents.Contains(eventName))
+            if(view.AttentionEvents.Contains(eventName))
             {
                 view.HandleEvent(eventName, data);
             }

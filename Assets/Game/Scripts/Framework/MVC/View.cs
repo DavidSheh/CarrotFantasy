@@ -8,7 +8,7 @@ public abstract class View : MonoBehaviour
 
     // 关心的事件列表
     [HideInInspector]
-    public List<string> AttactionEvents = new List<string>();
+    public List<string> AttentionEvents = new List<string>();
 
 
     //注册关心的事件
