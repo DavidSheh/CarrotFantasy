@@ -9,13 +9,16 @@ public static class Consts
     //存档
 
 
-    //Model
+    //Model ---> 以M开头表示数据模型（Model）
 
 
-    //View
+    //View ---> 以V开头表示视图（View）
 
 
-    //Controller
+    //Controller --- 以E开头表示事件（Event)
+    public const string E_StartUp = "E_StartUp";
 
+    public const string E_EnterScene = "E_EnterScene";  // SceneArg
+    public const string E_ExitScene = "E_ExitScene";    // SceneArg
 }
 

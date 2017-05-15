@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-public class SoundManger : Singleton<SoundManger>
+
+public class Sound : Singleton<Sound>
 {
     protected override void Awake()
     {
