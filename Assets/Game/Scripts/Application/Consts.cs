@@ -13,7 +13,7 @@ public static class Consts
 
 
     //View ---> 以V开头表示视图（View）
-
+    public const string V_Start = "V_Start";
 
     //Controller --- 以E开头表示事件（Event)
     public const string E_StartUp = "E_StartUp";
