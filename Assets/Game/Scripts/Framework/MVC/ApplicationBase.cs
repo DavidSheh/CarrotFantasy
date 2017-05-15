@@ -12,6 +12,6 @@ public class ApplicationBase<T> : Singleton<T> where T : MonoBehaviour
 
     protected void SendEvent(string eventName, object data = null)
     {
-        MVC.SendEvent(eventName);
+        MVC.SendEvent(eventName, data);
     }
 }

@@ -5,12 +5,12 @@ using System.Text;
 
 public static class MVC
 {
-    // 存储MVC
-    public static Dictionary<string, Model> Models = new Dictionary<string, Model>(); // 名字 --- 模型
-    public static Dictionary<string, View> Views = new Dictionary<string, View>(); // 名字 --- 视图
-    public static Dictionary<string, Type> CommandMap = new Dictionary<string, Type>(); // 事件名字 --- 控制器类型
+    //存储MVC
+    public static Dictionary<string, Model> Models = new Dictionary<string, Model>(); //名字---模型
+    public static Dictionary<string, View> Views = new Dictionary<string, View>();//名字---视图
+    public static Dictionary<string, Type> CommandMap = new Dictionary<string, Type>();//事件名字---控制器类型
 
-    // 注册
+    //注册
     public static void RegisterModel(Model model)
     {
         Models[model.Name] = model;
@@ -18,6 +18,14 @@ public static class MVC
 
     public static void RegisterView(View view)
     {
+        //防止重复注册
+        if (Views.ContainsKey(view.Name))
+            Views.Remove(view.Name);
+
+        //注册关心的事件
+        view.RegisterEvents();
+
+        //缓存
         Views[view.Name] = view;
     }
 
@@ -26,51 +34,48 @@ public static class MVC
         CommandMap[eventName] = controllerType;
     }
 
-    // 获取
-    public static Model GetModel<T>() where T : Model
+    //获取
+    public static Model GetModel<T>()
+        where T : Model
     {
-        foreach (var model in Models.Values)
+        foreach (Model m in Models.Values)
         {
-            if(model is T)
-            {
-                return model;
-            }
+            if (m is T)
+                return m;
         }
-
         return null;
     }
 
-    public static View GetView<T>() where T : View
+    public static View GetView<T>()
+        where T : View
     {
-        foreach (var view in Views.Values)
+        foreach (View v in Views.Values)
         {
-            if (view is T)
-            {
-                return view;
-            }
+            if (v is T)
+                return v;
         }
-
         return null;
     }
 
-    // 发送事件
+    //发送事件
     public static void SendEvent(string eventName, object data = null)
     {
-        // 控制器响应事件
-        if(CommandMap.ContainsKey(eventName))
+        //控制器响应事件
+        if (CommandMap.ContainsKey(eventName))
         {
             Type t = CommandMap[eventName];
             Controller c = Activator.CreateInstance(t) as Controller;
-            // 控制器执行
+            //控制器执行
             c.Execute(data);
         }
 
-        // 视图响应事件
-        foreach (var view in Views.Values)
+        //视图响应事件
+        foreach (View v in Views.Values)
         {
-            if(view.AttentionEvents.Contains(eventName))
+            if (v.AttentionEvents.Contains(eventName))
             {
-                view.HandleEvent(eventName, data);
+                //视图响应事件
+                v.HandleEvent(eventName, data);
             }
         }
     }
