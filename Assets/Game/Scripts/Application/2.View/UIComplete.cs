@@ -40,7 +40,8 @@ public class UIComplete : View
 
     public void OnSelectClick()
     {
-
+        // 回到开始界面
+        Game.Instance.LoadScene(1);
     }
 
     public void OnClearClick()

@@ -8,8 +8,11 @@ using System.Collections;
 public class Game : ApplicationBase<Game>
 {
     //全局访问功能
+    [HideInInspector]
     public ObjectPool ObjectPool = null; //对象池
+    [HideInInspector]
     public Sound Sound = null;//声音控制
+    [HideInInspector]
     public StaticData StaticData = null;//静态数据
 
     //全局方法
@@ -18,7 +21,7 @@ public class Game : ApplicationBase<Game>
         //---退出旧场景
         //事件参数
         SceneArgs e = new SceneArgs();
-        e.Level = SceneManager.GetActiveScene().buildIndex;
+        e.SceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         //发布事件
         SendEvent(Consts.E_ExitScene, e);
@@ -33,7 +36,7 @@ public class Game : ApplicationBase<Game>
 
         //事件参数
         SceneArgs e = new SceneArgs();
-        e.Level = level;
+        e.SceneIndex = level;
         //发布事件
         SendEvent(Consts.E_EnterScene, e);
     }

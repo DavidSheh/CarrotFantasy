@@ -5,6 +5,9 @@ public class Level
     // 名字
     public string Name;
 
+    // 卡片
+    public string CardImage;
+
     // 背景
     public string Background;
 
