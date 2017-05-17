@@ -1,7 +1,6 @@
 ﻿class EndLevelArgs
 {
-    public int LevelID { get; set; }
+    public int LevelID;
 
-    public bool IsSuccess;// 是否成功
+    public bool IsWin; //是否成功
 }
-

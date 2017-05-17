@@ -51,7 +51,7 @@ public class GameModel : Model
         get { return m_GameProgress; }
     }
 
-    public int PlayLevelIndex
+    public int PlayLevelID
     {
         get { return m_PlayLevelIndex; }
     }
@@ -114,9 +114,13 @@ public class GameModel : Model
     //游戏结束
     public void StopLevel(bool isWin)
     {
-        if (isWin && PlayLevelIndex > GameProgress)
+        if (isWin && PlayLevelID > GameProgress)
         {
-            Saver.SetProgress(PlayLevelIndex);
+            //保存进度
+            Saver.SetProgress(PlayLevelID);
+
+            //更新进度
+            m_GameProgress = Saver.GetProgress();
         }
         m_isPlaying = false;
     }
