@@ -12,6 +12,7 @@ public static class Consts
 
     //Model ---> 以M开头表示数据模型（Model）
     public const string M_GameModel = "M_GameModel";
+    public const string M_RoundModel = "M_RoundModel";
 
     //View ---> 以V开头表示视图（View）
     public const string V_Start = "V_Start";
@@ -33,6 +34,9 @@ public static class Consts
     public const string E_EndLevel = "E_EndLevel";    // EndLevelArg
 
     public const string E_CountDownComplete = "E_CountDownComplete";
+
+    public const string E_StartRound = "E_StartRound";// RoundArgs
+    public const string E_SpawnMonster = "E_SpawnMonster";// SpawnMonsterArgs
 }
 
 public enum GameSpeed
