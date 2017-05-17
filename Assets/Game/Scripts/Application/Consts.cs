@@ -8,10 +8,10 @@ public static class Consts
     public static readonly string CardDir = Application.dataPath + @"\Game\Resources\Res\Cards";
 
     //存档
-
+    public const string GameProgress = "GameProgress";
 
     //Model ---> 以M开头表示数据模型（Model）
-
+    public const string M_GameModel = "M_GameModel";
 
     //View ---> 以V开头表示视图（View）
     public const string V_Start = "V_Start";
