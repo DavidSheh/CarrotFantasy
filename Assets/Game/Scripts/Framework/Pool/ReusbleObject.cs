@@ -2,13 +2,8 @@
 using UnityEngine;
 public abstract class ReusbleObject : MonoBehaviour, IReusable
 {
-    public void OnSpawn()
-    {
+    public abstract void OnSpawn();
 
-    }
-
-    public void OnUnspawn()
-    {
-        throw new NotImplementedException();
-    }
+    public abstract void OnUnspawn();
 }
+

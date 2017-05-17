@@ -45,3 +45,13 @@ public enum GameSpeed
     Two
 }
 
+public enum MonsterType
+{
+    Monster0,
+    Monster1,
+    Monster2,
+    Monster3,
+    Monster4,
+    Monster5
+}
+
